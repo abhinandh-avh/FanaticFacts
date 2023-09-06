@@ -10,15 +10,25 @@ import (
 func main() {
 	r := gin.Default()
 
-	// Serve static assets
-	r.Static("/assets", "./assets")
+	r.Static("/static", "./static")
 
-	// Define routes and handlers
-	r.GET("/", func(c *gin.Context) {
-		renderTemplate(c, "index.html", nil)
+    r.LoadHTMLGlob("templates/*.tmpl")
+
+    r.GET("/", func(c *gin.Context) {
+        c.HTML(http.StatusOK, "index.tmpl", nil)
+    })
+
+
+	r.GET("/service", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "service.tmpl", nil)
 	})
-	r.GET("/services-content", func(c *gin.Context) {
-		renderTemplate(c, "service.html", nil)
+
+	r.GET("/contact", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "contact.tmpl", nil)
+	})
+
+	r.GET("/about", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "about.tmpl", nil)
 	})
 
 	// ...
@@ -26,17 +36,3 @@ func main() {
 	r.Run(":8080")
 }
 
-// Function to render HTML templates
-func renderTemplate(c *gin.Context, tmplName string, data interface{}) {
-	tmpl, err := template.ParseFiles("templates/" + tmplName)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to load template"})
-		return
-	}
-
-	err = tmpl.Execute(c.Writer, data)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to render template"})
-		return
-	}
-}
