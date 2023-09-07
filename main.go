@@ -1,7 +1,6 @@
 package main
 
 import (
-	"html/template"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -12,12 +11,11 @@ func main() {
 
 	r.Static("/static", "./static")
 
-    r.LoadHTMLGlob("templates/*.tmpl")
+	r.LoadHTMLGlob("templates/*.tmpl")
 
-    r.GET("/", func(c *gin.Context) {
-        c.HTML(http.StatusOK, "index.tmpl", nil)
-    })
-
+	r.GET("/", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "index.tmpl", nil)
+	})
 
 	r.GET("/service", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "service.tmpl", nil)
