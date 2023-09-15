@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+     <link rel="stylesheet" href="static/css/styles.css">
+</head>
+<body>
+    <div class="container">
+    <a href="/"><button type="button">Home</button></a>
+        <h2>Create a New Account</h2>
+        <!-- Display a message if needed -->
+        <!-- <p class="message">Error message goes here</p> -->
+
+       <form method="POST" action="/signup">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" placeholder="Your full name" required>
+
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" placeholder="Your age" required>
+
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" placeholder="Choose a username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Choose a password" required>
+
+            <input type="submit" value="Sign Up">
+        </form>
+        </form>
+        {{ .Error }}
+    </div>
+</body>
+</html>
